@@ -99,7 +99,7 @@ Now Isabella can issue to commercial paper.
 The details of the issuance such as bond face value etc should be displayed.
 
 
-#### Buy the bond
+### Buy the bond
 
 Come to the role of Balaji as the buyer of bond, he will buy the bond subsequently redeem the bond and end the lifecycle of the contract. So navigate into `digibank/application` directory and install the NodeJS dependencies (if haven't), and run:
 
@@ -109,7 +109,7 @@ Just like Isabella, Balaji is now has been enrolled as the representative to buy
 
 `node buy.js`
 
-#### Redeem the bond
+### Redeem the bond
 
 Finally, the final lifecyle of the CP is by redemption of the CP itself. For that, runs:
 
