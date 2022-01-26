@@ -15,56 +15,56 @@ Roles:-
  * Balaji - Digibank representative and admin for Digibank for CP (buyer/redeem). 
 
 ### Solutions:
-    #### Configure The Network
-    * Start the fabric-test network by going inside test-network/ and run `./network-starter.sh`
-    * Navigate inside `./configuration/cli/` and run `monitordocker.sh`. Parameter <network_name> can also be supplied to monitor specific network otherwise all docker networks will be monitored and this terminal will be used to monitor all transactional and debug logs.
-    * #### Preparing the issuance (Magnetocorp)
-    In general there are severals variable paths have to be set in order to prepare the organizations. An organization requires:
+ #### Configure The Network
+* Start the fabric-test network by going inside test-network/ and run `./network-starter.sh`
+* Navigate inside `./configuration/cli/` and run `monitordocker.sh`. Parameter <network_name> can also be supplied to monitor specific network otherwise all docker networks will be monitored and this terminal will be used to monitor all transactional and debug logs.
+* #### Preparing the issuance (Magnetocorp)
+In general there are severals variable paths have to be set in order to prepare the organizations. An organization requires:
 
-    1. `PATH=` set to `/bin`
-    2. `FABRIC_CFG_PATH=` set to `/config`
-    3. `CORE_PEER_TLS_ENABLED=` set to `true`
-    4. `CORE_PEER_LOCALMSPID=` set to organization MSP
-    5. `CORE_PEER_TLS_ROOTCERT_FILE=` set to the location of certificate authority .crt file
-    6. `CORE_PEER_MSPCONFIGPATH=` set to `user/OrgAdmin/msp `folder
-    7. `CORE_PEER_ADDRESS=` set to organization `address:port`
+1. `PATH=` set to `/bin`
+2. `FABRIC_CFG_PATH=` set to `/config`
+3. `CORE_PEER_TLS_ENABLED=` set to `true`
+4. `CORE_PEER_LOCALMSPID=` set to organization MSP
+5. `CORE_PEER_TLS_ROOTCERT_FILE=` set to the location of certificate authority .crt file
+6. `CORE_PEER_MSPCONFIGPATH=` set to `user/OrgAdmin/msp `folder
+7. `CORE_PEER_ADDRESS=` set to organization `address:port`
 
-    In this demo, run the script to source all the relevant paths.
-    `source magnetocorp.sh`
+In this demo, run the script to source all the relevant paths.
+`source magnetocorp.sh`
 
-    * #### Generating chaincode package
+* #### Generating chaincode package
 
-    The chaincode has to be packaged before being installed.
-    `peer lifecycle chaincode package cp.tar.gz --lang node --path ./contract --label cp_0`
+The chaincode has to be packaged before being installed.
+`peer lifecycle chaincode package cp.tar.gz --lang node --path ./contract --label cp_0`
 
-    * #### Installing the chaincode package
+* #### Installing the chaincode package
 
-    `peer lifecycle chaincode install cp.tar.gz`
+`peer lifecycle chaincode install cp.tar.gz`
 
-    * #### (Optional) Query the installed package
+* #### (Optional) Query the installed package
 
-    `peer lifecycle chaincode queryinstalled`
+`peer lifecycle chaincode queryinstalled`
 
-    * #### Source the chaincode package
-    Set the `PACKAGE_ID=` to the package ID that was just installed.
+* #### Source the chaincode package
+Set the `PACKAGE_ID=` to the package ID that was just installed.
 
-    * #### Chaincode approval
-    Depending on thee business logics, the smart contract will be required to be approved by both or singular organization(s)
+* #### Chaincode approval
+Depending on thee business logics, the smart contract will be required to be approved by both or singular organization(s)
 
-    `peer lifecycle chaincode approveformyorg --orderer localhost:7050 --ordererTLSHostnameOverride orderer.example.com --channelID mychannel --name papercontract -v 0 --package-id $PACKAGE_ID --sequence 1 --tls --cafile $ORDERER_CA `
+`peer lifecycle chaincode approveformyorg --orderer localhost:7050 --ordererTLSHostnameOverride orderer.example.com --channelID mychannel --name papercontract -v 0 --package-id $PACKAGE_ID --sequence 1 --tls --cafile $ORDERER_CA `
 
-    * #### Preparing the issuance (Digibank)
+* #### Preparing the issuance (Digibank)
 
-    The process of generating, installing, sourcing of chaincode will be the same for Digibank.
+The process of generating, installing, sourcing of chaincode will be the same for Digibank.
 
-    * #### Chaincode aporoval
+* #### Chaincode aporoval
 
-    `peer lifecycle chaincode approveformyorg --orderer localhost:7050 --ordererTLSHostnameOverride orderer.example.com --channelID mychannel --name papercontract -v 0 --package-id $PACKAGE_ID --sequence 1 --tls --cafile $ORDERER_CA `
+`peer lifecycle chaincode approveformyorg --orderer localhost:7050 --ordererTLSHostnameOverride orderer.example.com --channelID mychannel --name papercontract -v 0 --package-id $PACKAGE_ID --sequence 1 --tls --cafile $ORDERER_CA `
 
-    * #### Chaincode commit
-    Now that both organizations has approved the contract, Digibank will proceed to commit the chaincode into the network.
+* #### Chaincode commit
+Now that both organizations has approved the contract, Digibank will proceed to commit the chaincode into the network.
 
-    `peer lifecycle chaincode commit -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --peerAddresses localhost:7051 --tlsRootCertFiles ${PEER0_ORG1_CA} --peerAddresses localhost:9051 --tlsRootCertFiles ${PEER0_ORG2_CA} --channelID mychannel --name papercontract -v 0 --sequence 1 --tls --cafile $ORDERER_CA --waitForEvent`
+`peer lifecycle chaincode commit -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --peerAddresses localhost:7051 --tlsRootCertFiles ${PEER0_ORG1_CA} --peerAddresses localhost:9051 --tlsRootCertFiles ${PEER0_ORG2_CA} --channelID mychannel --name papercontract -v 0 --sequence 1 --tls --cafile $ORDERER_CA --waitForEvent`
 
 ### Issuance
 
