@@ -74,7 +74,7 @@ Nonetheless, I think in real world the issuance of corporate bond is usually don
 
 Anyways..
 
-#### Admin 
+#### Wallet 
 
 As Isabella has been appointed to conduct the issuance, she will first need to generate an identity / credential and stored it inside her wallet. The scripts are provided inside `application/` of each organization.
 
@@ -91,7 +91,7 @@ Isabella now have her own credential / identity which is now stored inside her w
 `/magnetocorp/user/isabella/wallet` inside the file `isabella.id`
 
 
-#### Issuance
+#### Issue
 
 Now Isabella can issue to commercial paper.
 `node issue.js`
