@@ -18,6 +18,10 @@ class FirstContract extends Contract {
         var response = await ctx.stub.getState(key)
         return response.toString()
     }
+
+    async emitEvent(ctx, name, payload){
+        ctx.stub.setEvent(name, Buffer.from(payload))
+    }
 } 
 
 module.exports = FirstContract;
