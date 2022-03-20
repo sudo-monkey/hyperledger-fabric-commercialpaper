@@ -57,6 +57,12 @@ Depending on thee business logics, the smart contract will be required to be app
 
 The process of generating, installing, sourcing of chaincode will be the same for Digibank.
 
+`source digibank.sh`
+
+`peer lifecycle chaincode install cp.tar.g`
+
+`export PACKAGE_ID=`
+
 * #### Chaincode aporoval
 
 `peer lifecycle chaincode approveformyorg --orderer localhost:7050 --ordererTLSHostnameOverride orderer.example.com --channelID mychannel --name papercontract -v 0 --package-id $PACKAGE_ID --sequence 1 --tls --cafile $ORDERER_CA `
